@@ -15,7 +15,7 @@ st.set_page_config(
 st.title("Google Universal Analytics vs GA4 performance comparison")
 
 # Read data from CSV
-df = pd.read_csv("in/tables/ua_vs_ga.csv")
+df = pd.read_csv("/data/in/tables/ua_vs_ga.csv")
 df["date"] = pd.to_datetime(df["date"]).dt.date
 source = ["All sources"] + df["source"].unique().tolist()
 medium = ["All mediums"] + df["medium"].unique().tolist()
