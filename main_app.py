@@ -6,7 +6,7 @@ import altair as alt
 import os
 import base64
 
-logo_image = os.path.abspath("./app/static/keboola.png")
+logo_image = os.path.abspath("./app/static/marketing.bi_keboola.png")
 
 logo_html = f"""<div style="display: flex; justify-content: flex-end;"><img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 100px; margin-left: -10px;"></div>"""
 html_footer = f"""
@@ -34,7 +34,7 @@ with st.container():
     st.title("Google Universal Analytics vs GA4 performance comparison")
 
 # Read data from CSV
-df = pd.read_csv("/data/in/tables/ua_vs_ga.csv")
+df = pd.read_csv("/data/in/tables/COMPARISON.csv")
 df["date"] = pd.to_datetime(df["date"]).dt.date
 source = ["All sources"] + df["source"].unique().tolist()
 medium = ["All mediums"] + df["medium"].unique().tolist()
