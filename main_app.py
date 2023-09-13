@@ -3,16 +3,35 @@ import pandas as pd
 from datetime import date
 import plotly.express as px
 import altair as alt
+import os
+import base64
+
+logo_image = os.path.abspath("./app/static/keboola.png")
+
+logo_html = f"""<div style="display: flex; justify-content: flex-end;"><img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 100px; margin-left: -10px;"></div>"""
+html_footer = f"""
+ <div style="display: flex; justify-content: flex-end;margin-top: 12%">
+        <div>
+            <p><strong>Version:</strong> 1.1</p>
+        </div>
+        <div style="margin-left: auto;">
+            <img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 100px;">
+        </div>
+    </div>
+"""
 
 # Set the page width
 st.set_page_config(
-    page_title="Google Universal Analytics vs GA4 performance comparison",
+    page_title="Google Universal Analytics vs GA4 Performance Comparison",
     layout="wide",  # Use "wide" layout for a wider page
     initial_sidebar_state="expanded"  # Expand the sidebar by default
 )
 
 # Title
-st.title("Google Universal Analytics vs GA4 performance comparison")
+ # Set up Streamlit container with title and logo
+with st.container():
+    st.markdown(f"{logo_html}", unsafe_allow_html=True)
+    st.title("Google Universal Analytics vs GA4 performance comparison")
 
 # Read data from CSV
 df = pd.read_csv("/data/in/tables/ua_vs_ga.csv")
@@ -104,3 +123,15 @@ with st.container():
 
     # Show the Altair grouped bar chart using the Streamlit Altair component
     st.altair_chart(chart, use_container_width=True)
+
+# Display HTML footer
+st.markdown(html_footer, unsafe_allow_html=True)
+
+# Hide Made with streamlit from footer
+hide_streamlit_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        </style>
+        """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
