@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from kbcstorage.client import Client
 from datetime import date
 import plotly.express as px
 import altair as alt
