@@ -6,7 +6,7 @@ import altair as alt
 import os
 import base64
 
-logo_image = os.path.abspath("./app/static/keboola.png")
+logo_image = os.path.abspath("./app/static/marketing.bi_keboola.png")
 
 logo_html = f"""<div style="display: flex; justify-content: flex-end;"><img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 100px; margin-left: -10px;"></div>"""
 html_footer = f"""
@@ -14,8 +14,8 @@ html_footer = f"""
         <div>
             <p><strong>Version:</strong> 1.1</p>
         </div>
-        <div style="margin-left: auto;">
-            <img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 100px;">
+         <div style="margin-left: auto;">
+            <img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 400px;">
         </div>
     </div>
 """
@@ -34,7 +34,7 @@ with st.container():
     st.title("Google Universal Analytics vs GA4 performance comparison")
 
 # Read data from CSV
-df = pd.read_csv("/data/in/tables/ua_vs_ga.csv")
+df = pd.read_csv("/data/in/tables/COMPARISON.csv")
 df["date"] = pd.to_datetime(df["date"]).dt.date
 source = ["All sources"] + df["source"].unique().tolist()
 medium = ["All mediums"] + df["medium"].unique().tolist()
@@ -77,9 +77,9 @@ with st.container():
 # Charts
 with st.container():
     # Group and aggregate the data
-    agg_df_users = filtered_df.groupby("date")[['ua_users', 'ga4api_users', 'ga4export_users']].sum().reset_index()
-    agg_df_sessions = filtered_df.groupby("date")[['ua_sessions', 'ga4api_sessions', 'ga4export_sessions']].sum().reset_index()
-    agg_df_transactions = filtered_df.groupby("date")[['ua_transactions', 'ga4api_transactions', 'ga4export_transactions']].sum().reset_index()
+    agg_df_users = filtered_df.groupby("date")[['ua_users', 'ga4api_users', 'ga4export_users', 'ga4_ua_users']].sum().reset_index()
+    agg_df_sessions = filtered_df.groupby("date")[['ua_sessions', 'ga4api_sessions', 'ga4export_sessions', 'ga4_ua_sessions']].sum().reset_index()
+    agg_df_transactions = filtered_df.groupby("date")[['ua_transactions', 'ga4api_transactions', 'ga4export_transactions', 'ga4_ua_transactions']].sum().reset_index()
     
     # Create Altair charts for each aggregation
     charts = []
@@ -104,7 +104,7 @@ with st.container():
     for chart in charts:
         st.altair_chart(chart, use_container_width=True)
 
-    agg_df_comparison = filtered_df.groupby("date")[['ga4ua_users', 'ga4ua_sessions', 'ga4ua_transactions']].sum().reset_index()
+    agg_df_comparison = filtered_df.groupby("date")[['ga4_ua_users', 'ga4_ua_sessions', 'ga4_ua_transactions']].sum().reset_index()
     # Melt the DataFrame to reshape it
     melted_df_comparison = pd.melt(agg_df_comparison, id_vars=['date'], var_name='source', value_name='value')
 
