@@ -14,8 +14,8 @@ html_footer = f"""
         <div>
             <p><strong>Version:</strong> 1.1</p>
         </div>
-        <div style="display: flex; justify-content: center;">
-          <img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 250px;">
+         <div style="margin-left: auto;">
+            <img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 400px;">
         </div>
     </div>
 """
@@ -77,9 +77,9 @@ with st.container():
 # Charts
 with st.container():
     # Group and aggregate the data
-    agg_df_users = filtered_df.groupby("date")[['ua_users', 'ga4api_users', 'ga4export_users']].sum().reset_index()
-    agg_df_sessions = filtered_df.groupby("date")[['ua_sessions', 'ga4api_sessions', 'ga4export_sessions']].sum().reset_index()
-    agg_df_transactions = filtered_df.groupby("date")[['ua_transactions', 'ga4api_transactions', 'ga4export_transactions']].sum().reset_index()
+    agg_df_users = filtered_df.groupby("date")[['ua_users', 'ga4api_users', 'ga4export_users', 'ga4_ua_users']].sum().reset_index()
+    agg_df_sessions = filtered_df.groupby("date")[['ua_sessions', 'ga4api_sessions', 'ga4export_sessions', 'ga4_ua_sessions']].sum().reset_index()
+    agg_df_transactions = filtered_df.groupby("date")[['ua_transactions', 'ga4api_transactions', 'ga4export_transactions', 'ga4_ua_transactions']].sum().reset_index()
     
     # Create Altair charts for each aggregation
     charts = []
