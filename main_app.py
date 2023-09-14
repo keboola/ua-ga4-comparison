@@ -14,8 +14,8 @@ html_footer = f"""
         <div>
             <p><strong>Version:</strong> 1.1</p>
         </div>
-        <div style="margin-left: auto;">
-            <img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 100px;">
+        <div style="display: flex; justify-content: center;">
+          <img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 250px;">
         </div>
     </div>
 """
@@ -104,7 +104,7 @@ with st.container():
     for chart in charts:
         st.altair_chart(chart, use_container_width=True)
 
-    agg_df_comparison = filtered_df.groupby("date")[['ga4ua_users', 'ga4ua_sessions', 'ga4ua_transactions']].sum().reset_index()
+    agg_df_comparison = filtered_df.groupby("date")[['ga4_ua_users', 'ga4_ua_sessions', 'ga4_ua_transactions']].sum().reset_index()
     # Melt the DataFrame to reshape it
     melted_df_comparison = pd.melt(agg_df_comparison, id_vars=['date'], var_name='source', value_name='value')
 
