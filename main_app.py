@@ -8,14 +8,14 @@ import base64
 
 logo_image = os.path.abspath("./app/static/marketing.bi_keboola.png")
 
-logo_html = f"""<div style="display: flex; justify-content: flex-end;"><img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 100px; margin-left: -10px;"></div>"""
+logo_html = f"""<div style="display: flex; justify-content: flex-end;"><img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 500px; margin-left: -10px;"></div>"""
 html_footer = f"""
  <div style="display: flex; justify-content: flex-end;margin-top: 12%">
         <div>
             <p><strong>Version:</strong> 1.1</p>
         </div>
          <div style="margin-left: auto;">
-            <img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 400px;">
+            <img src="data:image/png;base64,{base64.b64encode(open(logo_image, "rb").read()).decode()}" style="width: 500px;">
         </div>
     </div>
 """
