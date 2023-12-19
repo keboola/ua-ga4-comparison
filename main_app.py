@@ -21,11 +21,11 @@ html_footer = f"""
 """
 
 # Set the page width
-st.set_page_config(
-    page_title="Google Universal Analytics vs GA4 Performance Comparison",
-    layout="wide",  # Use "wide" layout for a wider page
-    initial_sidebar_state="expanded"  # Expand the sidebar by default
-)
+#st.set_page_config(
+#    page_title="Google Universal Analytics vs GA4 Performance Comparison",
+#    layout="wide",  # Use "wide" layout for a wider page
+#    initial_sidebar_state="expanded"  # Expand the sidebar by default
+#)
 
 # Title
  # Set up Streamlit container with title and logo
