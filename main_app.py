@@ -130,7 +130,6 @@ st.markdown(html_footer, unsafe_allow_html=True)
 # Hide Made with streamlit from footer
 hide_streamlit_style = """
         <style>
-        #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
         </style>
         """
